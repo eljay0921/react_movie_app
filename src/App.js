@@ -3,16 +3,17 @@ import React from "react";
 class App extends React.Component {
   state = {
     count: 3,
+    name: "jin",
   };
 
   add = () => {
-    console.log("add");
-    this.setState({ count: this.state.count + 1 });
+    this.setState((current) => ({ count: current.count + 1 }));
+    console.log(this.state);
   };
 
   minus = () => {
-    console.log("minus");
-    this.setState({ count: this.state.count - 1 });
+    this.setState((current) => ({ count: current.count - 1 }));
+    console.log(this.state);
   };
 
   render() {
