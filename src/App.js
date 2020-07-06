@@ -1,4 +1,6 @@
 import React from "react";
+import Axios from "axios";
+import Movie from "./Movie";
 
 class App extends React.Component {
   state = {
@@ -6,15 +8,49 @@ class App extends React.Component {
     movies: [],
   };
 
+  getMovies = async () => {
+    // let movies = await Axios.get("https://yts-proxy.now.sh/list_movies.json");
+    // console.log(movies.data.data.movies);
+
+    // 위 코드에서 => ES6에 맞는 문법을 적용하면
+    let {
+      data: {
+        data: { movies },
+      },
+    } = await Axios.get(
+      "https://yts-proxy.now.sh/list_movies.json?sort_by=rating"
+    );
+    console.log(movies);
+
+    // this.setState({ movies: movies });
+    // ES6 스타일
+    this.setState({ movies, isLoading: false });
+
+    // return movies;
+  };
+
   componentDidMount() {
-    setTimeout(() => {
-      this.setState({ isLoading: false });
-    }, 3000);
+    this.getMovies();
   }
 
   render() {
-    const { isLoading } = this.state;
-    return <div> {isLoading ? "Loading..." : "We are ready !"}</div>;
+    const { isLoading, movies } = this.state;
+    return (
+      <div>
+        {isLoading
+          ? "Loading..."
+          : movies.map((movie) => (
+              <Movie
+                key={movie.id}
+                id={movie.id}
+                year={movie.year}
+                title={movie.title}
+                summary={movie.summary}
+                poster={movie.medium_cover_image}
+              />
+            ))}
+      </div>
+    );
   }
 
   componentDidUpdate() {
