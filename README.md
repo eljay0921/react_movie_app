@@ -1,3 +1,3 @@
-# Movide App 2020
+# Movie App 2020
 
 React JS Fundamentals Course (2019 updated.)
