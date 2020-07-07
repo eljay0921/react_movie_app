@@ -4,6 +4,7 @@ import "./Movie.css";
 import { Link } from "react-router-dom";
 
 function Movie({ id, year, title, summary, poster, genres }) {
+  let originSummary = summary;
   return (
     <Link
       to={{
@@ -11,7 +12,7 @@ function Movie({ id, year, title, summary, poster, genres }) {
         state: {
           year,
           title,
-          summary,
+          summary: originSummary,
           poster,
           genres,
         },
