@@ -1,7 +1,12 @@
 import React from "react";
 
-function About() {
-  return <h1>HAH!</h1>;
+function About(props) {
+  return (
+    <div className="about__container">
+      <span>...!</span>
+      <span>~!~!~!</span>
+    </div>
+  );
 }
 
 export default About;
